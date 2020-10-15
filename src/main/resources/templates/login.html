@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head th:replace="commons/head :: head_fragment(title = 'Login', scripts = ~{::script}, links = ~{::link})">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+    <script type="text/javascript" th:src="@{/scripts/login.js}"></script>
+</head>
+
+<body>
+    <div th:replace="commons/header :: header_fragment"></div>
+    <main>
+        
+            <div class="input-content-container">
+                <div th:if="${param.error}" class="alert alert-danger">
+                    メールアドレス(ID)またはパスワードが正しくありません
+                </div>
+                <form th:action="@{/login}" method="post">
+                <div class="input-content-item">
+                    <input type="text" class="form-controll" name="email" placeholder="メールアドレス(ID)"/>
+                </div>
+                <div class="input-content-item">
+                    <input type="password" class="form-controll" name="password" placeholder="パスワード">
+                </div>
+                <div class="btn_area_center"><input type="submit" value="ログイン" class="btn"></div>
+                <!-- <div class="link-nav-container">
+                    <a th:href="${url2}"><span th:text="${message2}"></span></a><hr>
+                    <a th:href="${url3}"><span th:text="${message3}"></span></a>
+                </div> -->
+            </form>
+            </div>
+        
+    </main>
+</body>
+
+</html>
