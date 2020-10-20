@@ -1,32 +1,30 @@
 <header xmlns:th="http://www.thymeleaf.org" th:fragment="header_fragment">
-    <div id="top">
-        <div class="content-wrapper">
-            <div id="content-item-1">
-                <div th:if="${customerInfo != null}">
-                    <span th:text="${customerInfo.email}"></span>
-                </div>
-            </div>
-            <div th:if="${customerInfo}" id="content-item-2">
-                <form th:action="@{/logout}" name="logout" method="POST">
-                    <a href="javascript:logout.submit()"><span>ログアウト</span></a>
-                </form>
-                <a href="/customer/viewCartItems" 
-                    th:href="@{/customer/viewCartItems/{customerId}(customerId=${customerInfo.id})}">
-                        <span>ショッピングカート</span></a>
-            </div>
-            <div th:unless="${customerInfo}" id="content-item-2">
-                <a th:href="@{${url1}}"><span th:text="${message1}"></span></a>
-                <a th:href="@{${url2}}"><span th:text="${message2}"></span></a>
+    <nav class="navbar navbar-expand  navbar-light navbar-dark bg-dark">
+        <a th:href="@{/customer/index}" class="navbar-brand"><img th:src="@{/images/shop_icon.png}" 
+            id="nav-icon" alt="ヘッダーアイコン"></a>
+        <div th:if="${customerInfo != null}" class="navbar-nav ml-auto">
+            <a class="nav-item nav-link active" th:href="@{/customer/index}">ホーム</a>
+            <a class="nav-item nav-link active" th:href="@{/customer/index}">ガイド</a>
+            <a class="nav-item nav-link active" href="/customer/viewCartItems"
+                    th:href="@{/customer/viewCartItems/{customerId}(customerId=${customerInfo.id})}">カート</a></li>
+            <div class="dropdown">
+                <a class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">ログイン中</a>
+                  
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="###" class="dropdown-item">会員情報編集</a></li>
+                
+                    <li><form th:action="@{/logout}" name="logout" method="POST">
+                        <a href="javascript:logout.submit()" class="dropdown-item">ログアウト</a>
+                    </form></li>
+                </ul>
             </div>
         </div>
-    </div>
-    <div class="content-wrapper">
-        <div id="bottom-item1">
-            <a th:href="@{/customer/index}"><img th:src="@{/images/shop_icon.png}" id="header-icon" alt="ヘッダーアイコン"></a>
+
+        <div th:unless="${customerInfo}" class="navbar-nav ml-auto">
+            <a class="nav-item nav-link active" th:href="@{/customer/index}">ホーム</a>
+            <a class="nav-item nav-link active" th:href="@{/customer/index}">ガイド</a>
+            <a class="nav-item nav-link active" th:href="@{${url1}}">ログイン</a>
+            <a class="nav-item nav-link active" th:href="@{${url2}}">会員登録</a>
         </div>
-        <div id="bottom-item2">
-            <a th:href="@{/customer/index}"><label>ステッカー作成</label></a>
-            <a th:href="@{/customer/index}"><label>ご利用ガイド</label></a>
-        </div>
-    </div>
+    </nav>
 </header>
