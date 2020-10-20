@@ -11,11 +11,11 @@ main {
     width: 30vw;
     max-width: 400px;
     min-width: 250px;
-     position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translateY(-50%) translateX(-50%);
-      -webkit- transform: translateY(-50%) translateX(-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    -webkit- transform: translateY(-50%) translateX(-50%);
     
  
 }
@@ -39,7 +39,7 @@ main {
 
 .btn_area_center input {
   width: 100%;
-  
+  text-align: center;
   padding: 12px 0;
   margin: 10px 0 0 0;
   background: #fa8072;
@@ -52,10 +52,12 @@ main {
 }
 
 .alert {
-  color: #ff6347;
-  position: absolute;
-  top: -40px
+  margin: 0 0 0.3em 0;
+}
 
+.alert span {
+  color: #ff6347;
+  top: -40px;
 }
 
 .link-nav-container {

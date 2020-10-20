@@ -24,46 +24,50 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
-    @Autowired
-    ItemService itemService;
+  @Autowired
+  ItemService itemService;
 
-    @GetMapping(value = "customer/index")
-    public String itemList(@AuthenticationPrincipal CustomerDetails customer, Model model, CartItemForm form) {
-        List<Material> materialList = itemService.searchMaterialAll();
-        List<Method> methodList = itemService.searchMethodAll();
-        List<Color> colorList = itemService.searchColorAll();
-      
-        model.addAttribute("materialList", materialList);
-        model.addAttribute("methodList", methodList);
-        model.addAttribute("colorList", colorList);
-        model.addAttribute("customerInfo", customer);
-
-        if (customer != null) {
-          model.addAttribute("url1", "/customer/index");
-          model.addAttribute("message1", "注文履歴");
-          model.addAttribute("url2", "/customer/cart");
-          model.addAttribute("message2", "ショッピングカート");
-        } else {
-          model.addAttribute("url1", "/login");
-          model.addAttribute("message1", "ログイン");
-          model.addAttribute("url2", "/signup");
-          model.addAttribute("message2", "新規会員登録");
-        }
-        return "index";
+  @ModelAttribute
+  public void addAttributes(@AuthenticationPrincipal CustomerDetails customer, Model model) {
+    model.addAttribute("customerInfo", customer);
+    if (customer != null) {
+      model.addAttribute("url1", "/customer/index");
+      model.addAttribute("message1", "注文履歴");
+      model.addAttribute("url2", "/customer/cart");
+      model.addAttribute("message2", "ショッピングカート");
+    } else {
+      model.addAttribute("url1", "/login");
+      model.addAttribute("message1", "ログイン");
+      model.addAttribute("url2", "/signup");
+      model.addAttribute("message2", "新規会員登録");
     }
+  }
 
-    @RequestMapping(value = "/customer/cart/add", method = RequestMethod.POST)
-    public String cartItemAdd(@Validated @ModelAttribute CartItemForm cartItemForm, BindingResult result, Model model) {
-      if (result.hasErrors()) {
-        List<String> errorList = new ArrayList<String>();
-        for (ObjectError error : result.getAllErrors()) {
-          errorList.add(error.getDefaultMessage());
-        }
-        model.addAttribute("validationError", errorList);
-        return "index";
+  @GetMapping(value = "customer/index")
+  public String itemList(Model model, CartItemForm form) {
+    List<Material> materialList = itemService.searchMaterialAll();
+    List<Method> methodList = itemService.searchMethodAll();
+    List<Color> colorList = itemService.searchColorAll();
+
+    model.addAttribute("materialList", materialList);
+    model.addAttribute("methodList", methodList);
+    model.addAttribute("colorList", colorList);
+
+    return "index";
+  }
+
+  @RequestMapping(value = "/customer/cart/add", method = RequestMethod.POST)
+  public String cartItemAdd(@Validated @ModelAttribute CartItemForm cartItemForm, BindingResult result, Model model) {
+    if (result.hasErrors()) {
+      List<String> errorList = new ArrayList<String>();
+      for (ObjectError error : result.getAllErrors()) {
+        errorList.add(error.getDefaultMessage());
       }
-      // ユーザー情報の登録
-      itemService.saveCartItem(cartItemForm);
-      return "redirect:/customer/index";
+      model.addAttribute("validationError", errorList);
+      return "index";
     }
+    // ユーザー情報の登録
+    itemService.saveCartItem(cartItemForm);
+    return "redirect:/customer/index";
+  }
 }

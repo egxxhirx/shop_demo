@@ -1,11 +1,13 @@
 package com.example.shopdemo.entity;
 
 import java.util.Date;
-import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import lombok.Data;
 
 @Entity
 @Table(name = "methods")
@@ -19,12 +21,15 @@ public class Method {
     @Column(name = "method_name")
     private String method;
 
-    @Column(name = "price")
-    private int price;
+    @Column(name = "method_price")
+    private int methodPrice;
 
     @Column(name = "created_date")
     private Date createdDate;
 
     @Column(name = "updated_date")
     private Date updatedDate;
+
+    // @OneToMany(mappedBy = "method", cascade=CascadeType.ALL)
+    // private List<Method> methods;
 }

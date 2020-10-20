@@ -10,9 +10,9 @@
                 <form th:action="@{/logout}" name="logout" method="POST">
                     <a href="javascript:logout.submit()"><span>ログアウト</span></a>
                 </form>
-                <form th:action="@{/customer/viewCartItem}" name="viewCartItem" method="POST">
-                    <a href="javascript:viewCartItem.submit()"><span>ショッピングカート</span></a>
-                </form>
+                <a href="/customer/viewCartItems" 
+                    th:href="@{/customer/viewCartItems/{customerId}(customerId=${customerInfo.id})}">
+                        <span>ショッピングカート</span></a>
             </div>
             <div th:unless="${customerInfo}" id="content-item-2">
                 <a th:href="@{${url1}}"><span th:text="${message1}"></span></a>

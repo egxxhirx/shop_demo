@@ -26,14 +26,14 @@
                     </div>
                     <h3 class="title">完成サイズ</h3>
                     <div class="radio-wrapper">
-                        <div class="radio-container" th:each="item : ${materialList}">
+                        <div class="radio-container material-container" th:each="item : ${materialList}">
                             <input type="radio" class="custom-input" th:value="${item.id}" th:field="*{materialId}" />
                             <label class="custom-label" th:for="${#ids.prev('materialId')}" th:text="${item.material}"></label>
                         </div>
                     </div>
                                 <!-- <div th:if="${#fields.hasErrors('radio')}" th:errors="*{radio}" class="help-block">error</div> -->
                     <h3 class="title">色</h3>
-                    <div class="radio-wrapper">          
+                    <div class="radio-wrapper" id="color-container">          
                         <div class="radio-container" th:each="item : ${colorList}">
                             <input type="radio" class="custom-input" th:value="${item.id}" th:field="*{colorId}" />
                             <label class="custom-label" th:for="${#ids.prev('colorId')}" th:text="${item.color}"></label>
@@ -41,7 +41,7 @@
                     </div>
                     <h3 class="title">作成方法</h3>
                     <div class="radio-wrapper">
-                        <div class="radio-container" th:each="item : ${methodList}">
+                        <div class="radio-container method-container" th:each="item : ${methodList}">
                             <input type="radio" class="custom-input" th:value="${item.id}" th:field="*{methodId}"/>
                             <label class="custom-label" th:for="${#ids.prev('methodId')}" th:text="${item.method}"></label>
                         </div>
@@ -49,8 +49,11 @@
                             
                                 <!-- <div th:if="${#fields.hasErrors('radio')}" th:errors="*{radio}" class="help-block">error</div> -->
                     <h3 class="title">製作枚数</h3>  
-                    <div id="number-container">
-                        <td><input type="number" value="1" min="1" max="999" th:field="*{quantity}"></td>
+                    <div id="quantitiy-container">
+                        <td><input type="number" value="1" min="1" max="999" th:attr="name='quantity'"></td>
+                    </div>
+                    <div id="price-container">
+                        <span id="price-label">¥1,111</span>
                     </div>
                     <div class="btn_area_center"><input type="submit" value="カートに追加" class="btn"></div>
                 </form>

@@ -1,11 +1,13 @@
 package com.example.shopdemo.entity;
 
 import java.util.Date;
-import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import lombok.Data;
 
 @Entity
 @Table(name = "colors")
@@ -24,4 +26,7 @@ public class Color {
 
     @Column(name = "updated_date")
     private Date updatedDate;
+
+    // @OneToMany(mappedBy = "color", cascade=CascadeType.ALL)
+    // private List<Color> colors;
 }

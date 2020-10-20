@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head th:replace="commons/head :: head_fragment(title = 'CartItem', scripts = ~{::script}, links = ~{::link})">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cartitems.css}" />
+    <script type="text/javascript" th:src="@{/scripts/cartitems.js}"></script>
+</head>
+
+<body>
+    <div th:replace="commons/header :: header_fragment"></div>
+    <main>
+        <div id="main-content-wrapper">
+            <div class="items-container">
+                
+                <div class="detail-item" 　id="item1">
+                    <label id="material" class="custom-label" th:text="${column1}"></label>
+                    <label id="material" class="custom-label" th:text="${column2}"></label>
+                </div>
+                <div class="detail-item" id="item2">
+                    <label id="method" class="custom-label" th:text="${column3}"></label>
+                </div>
+                <div class="detail-item" id="item3">
+                    <label id="quantity" class="custom-label" th:text="${column4}"></label>
+                </div>
+        
+                <div class="detail-item" id="item4">
+                    <label id="quantity" class="custom-label" th:text="${column5}"></label>
+                </div>
+            </div>
+
+            <div class="items-container" th:each="item : ${cartItems}">
+    
+                <div class="detail-item" 　id="item1">
+                    <label id="material" class="custom-label" th:text="${item.material}"></label>
+                    <label id="color" class="custom-label" th:text="${item.color}"></label>
+                   
+                    <form th:action="@{cart/delete}" th:object="${cartItemForm}" th:method="put">
+                        <input type="hidden" th:value="${item.id}" th:attr="name='id'" />
+                        <input type="submit" value="削除する" class="btn">
+                    </form>
+                    
+                </div>
+                <div class="detail-item" id="item2">
+                    <label id="method" class="custom-label" th:text="${item.method}"></label>
+                </div>
+                <div class="detail-item" id="item3">
+                    <form th:action="@{update/{id}(id=${item.id})}" th:object="${cartItemForm}" th:method="post">
+                        <input type="text" th:value="${item.quantity}" th:attr="name='quantity'" />
+                        <input type="submit" value="変更" class="btn" />
+                    </form>
+                </div>
+
+                
+                <div class="detail-item" id="item4">
+                    <label id="quantity" class="custom-label"
+                        th:text="'¥' + ${(item.materialPrice * item.quantity) + item.methodPrice}"></label>
+                        <!-- <label id="quantity" class="custom-label"
+                        th:text="'¥' + ${#aggregates.sum(item.id.{item.materialPrice * item.quantity})}"></label> -->
+                </div>
+            </div>
+            <!-- <div class="items-container">
+                <div class="total-price" th:text="|$(#aggregates.sum(cartItems.![materia]))"></div>
+            </div> -->
+        </div>
+        <div id="register-content-wrapper">
+            <div class="items-container">
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

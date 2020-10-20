@@ -1,11 +1,14 @@
 package com.example.shopdemo.entity;
 
 import java.util.Date;
-import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
 import javax.persistence.Table;
+
+import lombok.Data;
 
 @Entity
 @Table(name = "cart_items")
@@ -34,9 +37,22 @@ public class CartItem {
     @Column(name = "delete_flg")
     private int isDeleted;
     
-    @Column(name = "created_date")
-    private Date createdDate;
+    // @Column(name = "created_date")
+    // private Date createdDate;
 
-    @Column(name = "updated_date")
-    private Date updatedDate;
+    // @Column(name = "updated_date")
+    // private Date updatedDate;
+
+    // @ManyToOne
+    // @JoinColumn(name = "material_id")
+    // private Material material;
+
+    // @ManyToOne
+    // @JoinColumn(name = "color_id")
+    // private Color color;
+
+    // @ManyToOne
+    // @JoinColumn(name = "method_id")
+    // private Method method;
+
 }

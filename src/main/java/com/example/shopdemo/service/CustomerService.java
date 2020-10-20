@@ -19,7 +19,7 @@ public class CustomerService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public Customer create(Customer customer, String rawPassword) {
+    public Customer add(Customer customer, String rawPassword) {
         String encodedPassword = passwordEncoder.encode(rawPassword);
         customer.setPassword(encodedPassword);
         return customerRepository.save(customer);

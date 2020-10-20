@@ -9,21 +9,28 @@
 <body>
     <div th:replace="commons/header :: header_fragment"></div>
     <main>
-        <!--/* ログインエラー時にメッセージを表示 */-->
-        <div th:if="${param.error}" class="alert alert-danger">
-            メールアドレス(ID)またはパスワードが正しくありません
-        </div>
-        <form th:action="@{/customer}" action="/customer" th:object="${customerForm}" th:method="post">
-            <div class="input-content-container">
+        <div class="input-content-container">
+            <!--/* エラー時にメッセージを表示 */-->
+            <div class="alert" th:each="error : ${validationMessage}">
+                <span th:text="${error}"></span>
+            </div>
+            <form th:action="@{/customer}" action="/customer" th:object="${customerForm}" th:method="post">
+
                 <div class="input-content-item">
-                    <input type="text" class="form-controll" name="email" th:field="*{email}" placeholder="メールアドレス"/>
+                    <input type="text" class="form-controll" name="email" th:field="*{email}" placeholder="メールアドレス" />
                 </div>
-                <div th:classappend="${#fields.hasErrors('password')}? 'has-error'"　class="input-content-item">
-                    <input type="password" class="form-controll" name="password" th:field="*{password}" placeholder="パスワード">
+                <div class="input-content-item">
+                    <input type="password" class="form-controll" name="password" th:field="*{password}"
+                        placeholder="パスワード">
+                </div>
+                <div class="input-content-item">
+                    <input type="password" class="form-controll" name="confirm-password" th:field="*{confirmPassword}"
+                        placeholder="確認用パスワード">
                 </div>
                 <div class="btn_area_center"><input type="submit" value="新規会員登録" class="btn"></div>
-            </div>
-        </form>
+
+            </form>
+        </div>
     </main>
 </body>
 
