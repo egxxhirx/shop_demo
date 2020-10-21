@@ -1,7 +1,6 @@
 <header xmlns:th="http://www.thymeleaf.org" th:fragment="header_fragment">
-    <nav class="navbar navbar-expand  navbar-light navbar-dark bg-dark">
-        <a th:href="@{/customer/index}" class="navbar-brand"><img th:src="@{/images/shop_icon.png}" 
-            id="nav-icon" alt="ヘッダーアイコン"></a>
+    <nav class="navbar navbar-expand  navbar-light navbar-light bg-light">
+        <a th:href="@{/customer/index}" class="navbar-brand"><div class="h3">STICKER GENERATOR</div></a>
         <div th:if="${customerInfo != null}" class="navbar-nav ml-auto">
             <a class="nav-item nav-link active" th:href="@{/customer/index}">ホーム</a>
             <a class="nav-item nav-link active" th:href="@{/customer/index}">ガイド</a>

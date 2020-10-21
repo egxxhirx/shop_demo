@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head th:replace="commons/head :: head_fragment(title = 'Home', scripts = ~{::script}, links = ~{::link})">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
     <script type="text/javascript" th:src="@{/scripts/home.js}"></script>
 </head>
 
 <body>
     <div th:replace="commons/header :: header_fragment"></div>
-    <main>
-        <div id="main-content-wrapper">
-            <div id="main-content-1">
-                <h3 class="title">作成イメージ</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <h3 class="mt-3">作成イメージ</h3>
                 <div class="item-img-container">
+            
 
                 </div>
             </div>
 
-            <div id="main-content-2">
+            <div class="col-sm-4">
                 <form th:action="@{cart/add}" th:object="${cartItemForm}" th:method="put">
                     <div th:if="${customerInfo}">
                         <input type="hidden" th:value="${customerInfo.id}" th:attr="name='customerId'" />
@@ -24,43 +26,45 @@
                     <div th:unless="${customerInfo}">
                         <input type="hidden" th:value="3" name="*{customerId}" />
                     </div>
-                    <h3 class="title">完成サイズ</h3>
-                    <div class="radio-wrapper">
-                        <div class="radio-container material-container" th:each="item : ${materialList}">
-                            <input type="radio" class="custom-input" th:value="${item.id}" th:field="*{materialId}" />
-                            <label class="custom-label" th:for="${#ids.prev('materialId')}" th:text="${item.material}"></label>
+                    <h3 class="mt-3">完成サイズ</h3>
+                    <div class="btn-group btn-group-toggle special" data-toggle="buttons">
+                        <div class="btn btn-outline-secondary" th:each="item : ${materialList}">
+                            <input type="radio" autocomplete="off" th:value="${item.id}" th:field="*{materialId}" />
+                            <label class="m-0" th:for="${#ids.prev('materialId')}" th:text="${item.material}"></label>
                         </div>
                     </div>
-                                <!-- <div th:if="${#fields.hasErrors('radio')}" th:errors="*{radio}" class="help-block">error</div> -->
-                    <h3 class="title">色</h3>
-                    <div class="radio-wrapper" id="color-container">          
-                        <div class="radio-container" th:each="item : ${colorList}">
-                            <input type="radio" class="custom-input" th:value="${item.id}" th:field="*{colorId}" />
-                            <label class="custom-label" th:for="${#ids.prev('colorId')}" th:text="${item.color}"></label>
+
+                    <h3 class="mt-3">作成方法</h3>
+                    <div class="btn-group btn-group-toggle special" data-toggle="buttons"> 
+                        <div class="btn btn-outline-secondary" th:each="item : ${methodList}">
+                            <input type="radio" th:value="${item.id}" th:field="*{methodId}"/>
+                            <label class="m-0" th:for="${#ids.prev('methodId')}" th:text="${item.method}"></label>
                         </div>
                     </div>
-                    <h3 class="title">作成方法</h3>
-                    <div class="radio-wrapper">
-                        <div class="radio-container method-container" th:each="item : ${methodList}">
-                            <input type="radio" class="custom-input" th:value="${item.id}" th:field="*{methodId}"/>
-                            <label class="custom-label" th:for="${#ids.prev('methodId')}" th:text="${item.method}"></label>
+                    
+                    <h3 class="mt-3">色</h3>
+                    <div class="d-flex flex-row　flex-wrap">         
+                        <div th:each="item : ${colorList}">
+                            <input type="radio" th:value="${item.id}" th:field="*{colorId}" />
+                            <label class="m-0" th:for="${#ids.prev('colorId')}">
+                            <svg width=auto min-width=40 height=40><circle cx="20" cy="20" r="15" stroke="black" stroke-width="2" th:style="|fill: ${item.color}|" /></svg>
+                             </label>
                         </div>
                     </div>
-                            
-                                <!-- <div th:if="${#fields.hasErrors('radio')}" th:errors="*{radio}" class="help-block">error</div> -->
-                    <h3 class="title">製作枚数</h3>  
-                    <div id="quantitiy-container">
-                        <td><input type="number" value="1" min="1" max="999" th:attr="name='quantity'"></td>
+                    
+                    <h3 class="mt-3 ">製作枚数</h3> 
+                    <div class="has-secondary">
+                        <input type="number" value="1" min="1" max="999" class="form-control border border-secondary" th:attr="name='quantity'">
                     </div>
-                    <div id="price-container">
-                        <span id="price-label">¥1,111</span>
-                    </div>
-                    <div class="btn_area_center"><input type="submit" value="カートに追加" class="btn"></div>
+                
+                   
+                    <h3 class="mt-3 mr-0">¥1,111</h3>
+                    
+                    <input type="submit" value="カートに追加" class="btn btn-danger">
                 </form>
             </div>
         </div>
-    </main>
-
+    </div>
 </body>
 
 </html>

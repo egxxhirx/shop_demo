@@ -1,6 +1,4 @@
 
-#nav-icon {
-  height: 30px;
-  width: auto
-}
-
+input[type=radio] {
+  display: none; /* ラジオボタンを非表示にする */
+  }
