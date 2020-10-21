@@ -1,4 +1,62 @@
 
-input[type=radio] {
-  display: none; /* ラジオボタンを非表示にする */
-  }
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 160px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 150px;
+  background-color: #f5f5f5;
+}
+
+
+.container-m {
+  margin-top: 1.5rem;
+}
+
+.flex-fill input[type=radio] {
+  display: none;
+}
+.svg {
+  transition: all 0.3s ease 0s;
+}
+
+.flex-fill input[type=radio]:checked+label #svg-outline {
+  opacity: 1.0;
+}
+
+.flex-fill {
+  text-align: center;
+}
+
+#svg-outline {
+  opacity: 0;
+}
+
+label:hover #svg-circle {
+  fill-opacity: 1.0;
+}
+
+.flex-fill input[type=radio]:checked+label #svg-circle {
+  fill-opacity: 1.0;
+}
+
+#svg-circle {
+  fill-opacity: 0.3;
+}
+
+.row-eq-height {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+footer {
+  height: 160px;
+}

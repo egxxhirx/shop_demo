@@ -1,0 +1,33 @@
+<header xmlns:th="http://www.thymeleaf.org" th:fragment="footer_fragment"> 
+<footer class="footer border-top border-secondary text-secondary">
+    <div class="container">
+      <div class="row">
+               <div class="col-md-6 col-sm-4 col-6 mt-2">
+                 <span class="logo">LOGO</span>
+               </div>
+               
+               <div class="col-md-3 col-sm-4 col-6 mt-2">
+                   <ul class="menu w-100">
+                        <span class="h4">Menu</span>
+                        <li class="border-top border-secondary w-75 pt-1">
+                            <a href="/customer/index">ホーム</a></li>
+                              
+                         <li><a th:href="${url1}"><text th:text="${message1}"></text></a></li>
+                         <li><a th:href="${url2}"><text th:text="${message2}"></text></a></li>
+                         <li><a href="#">当サイトについて</a></li>
+                         <li><a href="#">利用規約</a></li>
+                    </ul>
+               </div>
+          
+               <div class="col-md-3 col-sm-4 col-6 mt-2">
+                 <ul class="address">
+                       <span class="h4">Contact</span>       
+                       <li class="border-top border-secondary w-75 pt-1">
+                          <a href="#">電話</a></li>
+                       <li><a href="#">メール</a></li> 
+                       <li><a href="#">お問い合わせフォーム</a></li> 
+                  </ul>
+              </div>
+          </div> 
+       </div>
+   </footer>

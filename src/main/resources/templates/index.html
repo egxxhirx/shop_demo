@@ -7,64 +7,81 @@
 </head>
 
 <body>
-    <div th:replace="commons/header :: header_fragment"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8">
-                <h3 class="mt-3">作成イメージ</h3>
-                <div class="item-img-container">
-            
-
-                </div>
+    <div id="wrapper">
+        <div th:replace="commons/header :: header_fragment"></div>
+        <div class="container container-m">
+            <div class="row">
+            <div class="col-md-12  img-hidden">
+                <div class="h4 mr-0">商品を選択してください</div>
             </div>
+            </div>
+        </div>
+        <div class="container container-m">
+            <div class="row row-eq-height">
+                <div class="col-12 col-md-8">
+                    <div class="border border-secondary rounded h-100">
+                        <div class="d-flex w-100 justify-content-start flex-row mt-4">
+                            <div class="h6 p-2 bg-secondary rounded-right m-0 text-light">Preview</div>
+                        </div>
 
-            <div class="col-sm-4">
-                <form th:action="@{cart/add}" th:object="${cartItemForm}" th:method="put">
-                    <div th:if="${customerInfo}">
-                        <input type="hidden" th:value="${customerInfo.id}" th:attr="name='customerId'" />
                     </div>
-                    <div th:unless="${customerInfo}">
-                        <input type="hidden" th:value="3" name="*{customerId}" />
-                    </div>
-                    <h3 class="mt-3">完成サイズ</h3>
-                    <div class="btn-group btn-group-toggle special" data-toggle="buttons">
-                        <div class="btn btn-outline-secondary" th:each="item : ${materialList}">
-                            <input type="radio" autocomplete="off" th:value="${item.id}" th:field="*{materialId}" />
-                            <label class="m-0" th:for="${#ids.prev('materialId')}" th:text="${item.material}"></label>
-                        </div>
-                    </div>
+                </div>
 
-                    <h3 class="mt-3">作成方法</h3>
-                    <div class="btn-group btn-group-toggle special" data-toggle="buttons"> 
-                        <div class="btn btn-outline-secondary" th:each="item : ${methodList}">
-                            <input type="radio" th:value="${item.id}" th:field="*{methodId}"/>
-                            <label class="m-0" th:for="${#ids.prev('methodId')}" th:text="${item.method}"></label>
+                <div class="col-12 col-md-4">
+                    <form th:action="@{cart/add}" th:object="${cartItemForm}" th:method="put">
+                        <div th:if="${customerInfo}">
+                            <input type="hidden" th:value="${customerInfo.id}" th:attr="name='customerId'" />
                         </div>
-                    </div>
-                    
-                    <h3 class="mt-3">色</h3>
-                    <div class="d-flex flex-row　flex-wrap">         
-                        <div th:each="item : ${colorList}">
-                            <input type="radio" th:value="${item.id}" th:field="*{colorId}" />
-                            <label class="m-0" th:for="${#ids.prev('colorId')}">
-                            <svg width=auto min-width=40 height=40><circle cx="20" cy="20" r="15" stroke="black" stroke-width="2" th:style="|fill: ${item.color}|" /></svg>
-                             </label>
+                        <div th:unless="${customerInfo}">
+                            <input type="hidden" th:value="3" name="*{customerId}" />
                         </div>
-                    </div>
+                        <div class="h6 mt-4">完成サイズ</div>
+                        <div class="btn-group btn-group-toggle special" data-toggle="buttons">
+                            <div class="btn btn-outline-secondary" th:each="item : ${materialList}">
+                                <input type="radio" autocomplete="off" th:value="${item.id}" th:field="*{materialId}" />
+                                <label class="m-0" th:for="${#ids.prev('materialId')}" th:text="${item.material}"></label>
+                            </div>
+                        </div>
+
+                        <div class="h6 mt-4">作成方法</div>
+                        <div class="btn-group btn-group-toggle special" data-toggle="buttons"> 
+                            <div class="btn btn-outline-secondary" th:each="item : ${methodList}">
+                                <input type="radio" th:value="${item.id}" th:field="*{methodId}"/>
+                                <label class="m-0" th:for="${#ids.prev('methodId')}" th:text="${item.method}"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="h6 mt-4">色</div>
+                        
+                        <div class="d-flex flex-row flex-wrap justify-content-center">
+                            <div th:each="item : ${colorList}" class="flex-fill" >
+                            
+                                <input type="radio" th:value="${item.id}" th:field="*{colorId}" onchange="getColorId()"/>
+                                <label class="m-0" th:for="${#ids.prev('colorId')}">
+                                    <svg class="svg" width=40 height=40>
+                                        <circle id="svg-outline"cx="20" cy="20" r="18" stroke="#6c757d" stroke-width="1.5" fill-opacity="0.0"/>
+                                        <circle id="svg-circle" cx="20" cy="20" r="15" stroke="#6c757d" stroke-width="1.5" 
+                                            th:style="|fill: ${item.color};|" />
+                                    </svg>
+                                </label>
+                            </div>
+                        </div> 
+                        
+                        <div class="h6 mt-4">製作枚数</div> 
+                        <div class="has-secondary">
+                            <input type="number" value="1" min="1" max="999" class="form-control border border-secondary" th:attr="name='quantity'">
+                        </div>
                     
-                    <h3 class="mt-3 ">製作枚数</h3> 
-                    <div class="has-secondary">
-                        <input type="number" value="1" min="1" max="999" class="form-control border border-secondary" th:attr="name='quantity'">
-                    </div>
-                
-                   
-                    <h3 class="mt-3 mr-0">¥1,111</h3>
-                    
-                    <input type="submit" value="カートに追加" class="btn btn-danger">
-                </form>
+                        <div class="d-flex flex-row justify-content-between">
+                            <div class="h3 mt-4">¥1,111</div>
+                            <input type="submit" value="カートに追加" class="btn btn-danger btn-sm px-2 py-o mt-4">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+    <div th:replace="commons/footer :: footer_fragment"></div>
 </body>
 
 </html>

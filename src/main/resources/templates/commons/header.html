@@ -1,13 +1,13 @@
-<header xmlns:th="http://www.thymeleaf.org" th:fragment="header_fragment">
-    <nav class="navbar navbar-expand  navbar-light navbar-light bg-light">
-        <a th:href="@{/customer/index}" class="navbar-brand"><div class="h3">STICKER GENERATOR</div></a>
+<header xmlns:th="http://www.thymeleaf.org" th:fragment="header_fragment">   
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <a th:href="@{/customer/index}" class="navbar-brand"><div class="h3 m-0">Sticker Generator</div></a>
         <div th:if="${customerInfo != null}" class="navbar-nav ml-auto">
-            <a class="nav-item nav-link active" th:href="@{/customer/index}">ホーム</a>
-            <a class="nav-item nav-link active" th:href="@{/customer/index}">ガイド</a>
-            <a class="nav-item nav-link active" href="/customer/viewCartItems"
+            <a class="nav-item nav-link active ml=1" th:href="@{/customer/index}">ホーム</a>
+            <a class="nav-item nav-link active ml=1" th:href="@{/customer/index}">ガイド</a>
+            <a class="nav-item nav-link active ml=1" href="/customer/viewCartItems"
                     th:href="@{/customer/viewCartItems/{customerId}(customerId=${customerInfo.id})}">カート</a></li>
             <div class="dropdown">
-                <a class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">ログイン中</a>
+                <a class="btn btn-info dropdown-toggle ml=2" type="button" data-toggle="dropdown">ログイン中</a>
                   
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li><a href="###" class="dropdown-item">会員情報編集</a></li>
@@ -20,10 +20,10 @@
         </div>
 
         <div th:unless="${customerInfo}" class="navbar-nav ml-auto">
-            <a class="nav-item nav-link active" th:href="@{/customer/index}">ホーム</a>
-            <a class="nav-item nav-link active" th:href="@{/customer/index}">ガイド</a>
-            <a class="nav-item nav-link active" th:href="@{${url1}}">ログイン</a>
-            <a class="nav-item nav-link active" th:href="@{${url2}}">会員登録</a>
+            <a class="nav-item nav-link active ml=1" th:href="@{/customer/index}">ホーム</a>
+            <a class="nav-item nav-link active ml=1" th:href="@{/customer/index}">ガイド</a>
+            <a class="nav-item nav-link active ml=1" th:href="@{${url1}}">ログイン</a>
+            <a class="nav-item nav-link active ml=2" th:href="@{${url2}}">会員登録</a>
         </div>
     </nav>
 </header>

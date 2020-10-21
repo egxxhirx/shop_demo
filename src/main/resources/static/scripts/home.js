@@ -1,10 +1,8 @@
-// $(function () {
-//     $('input[class="custom-input"]').change(function () {
-//         var materialPrice = $('.material-container input[type="radio"]:checked').val();
-//         var methodPrice = $('.method-container input[type="radio"]:checked').val();
-//         var quantity = $('.quantity-container input[type="number"]').val();
-//         alert(materialPrice);
-//         var ttlPrice = "¥" + (materialPrice * quantity) + methodPrice + "-";
-//         $('#price-label').text(ttlPrice);
-//     });
-// });
+function getColorId() {
+    var colorIds = document.getElementsByName("colorId");
+    for (var i = 0; i < colorIds.length; i++) {
+        if (colorIds[i].checked) {
+            alert("選択中：" + colorIds[i].value);
+        }
+    }
+}
